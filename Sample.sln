@@ -1,21 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Server", "Sample\Sample.Server.csproj", "{524A042A-777D-4B8C-9A50-73FCDF67BEE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Server", "Sample\Sample.Server.csproj", "{524A042A-777D-4B8C-9A50-73FCDF67BEE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Client", "Sample.Client\Sample.Client.csproj", "{2E59FCBA-4518-40B6-AE2B-19089355EA88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Client", "Sample.Client\Sample.Client.csproj", "{2E59FCBA-4518-40B6-AE2B-19089355EA88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Infrastructure", "Sample.Infrastructure\Sample.Infrastructure.csproj", "{65E1AC0C-908A-4994-8FCE-1FA384562EB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.EventSourcing", "Sample.Infrastructure\Sample.Infrastructure.EventSourcing.csproj", "{65E1AC0C-908A-4994-8FCE-1FA384562EB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.UserManagement", "Sample.UserManagement\Sample.UserManagement.csproj", "{4534D5E9-3237-4F98-85F0-8000854B7F91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement", "Sample.UserManagement\Sample.UserManagement.csproj", "{4534D5E9-3237-4F98-85F0-8000854B7F91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.UserManagement.Contract", "Sample.UserManagement.Contract\Sample.UserManagement.Contract.csproj", "{8A7B08F5-891B-4B85-B4A5-6114316B0085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement.Contract", "Sample.UserManagement.Contract\Sample.UserManagement.Contract.csproj", "{8A7B08F5-891B-4B85-B4A5-6114316B0085}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserManagement", "UserManagement", "{CCCC9953-CEE6-47DD-8656-713C86811A12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.UserManagement.Domain", "Sample.UserManagement.Domain\Sample.UserManagement.Domain.csproj", "{1BC17BC9-EB72-4CD9-9D47-D08A24454F78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement.Domain", "Sample.UserManagement.Domain\Sample.UserManagement.Domain.csproj", "{1BC17BC9-EB72-4CD9-9D47-D08A24454F78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Infrastructure.Remoting", "Sample.Infrastructure.Remoting\Sample.Infrastructure.Remoting.csproj", "{BB2F880F-509E-4BCA-A91D-988E4B5AE767}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{1BC17BC9-EB72-4CD9-9D47-D08A24454F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BC17BC9-EB72-4CD9-9D47-D08A24454F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BC17BC9-EB72-4CD9-9D47-D08A24454F78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB2F880F-509E-4BCA-A91D-988E4B5AE767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB2F880F-509E-4BCA-A91D-988E4B5AE767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB2F880F-509E-4BCA-A91D-988E4B5AE767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB2F880F-509E-4BCA-A91D-988E4B5AE767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
