@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Sample.Infrastructure.Remoting.Contracts;
 
-namespace Sample.Infrastructure.Remoting
+namespace Sample.Infrastructure.Remoting.Communication
 {
     internal class RemoteResponse : IRemoteMessage
     {
@@ -20,5 +21,7 @@ namespace Sample.Infrastructure.Remoting
         public string ResponseType { get; }
 
         public object Response { get; }
+
+        public MessageHeaders Headers { get; }
     }
 }
