@@ -3,9 +3,9 @@ using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Communication
 {
-    public interface IListener<TMessage> where TMessage : IRemoteMessage
+    public interface IListener<TInterface>
     {
         void StartPolling();
-        void AddHandler(Func<TMessage, bool> handler);
+        void AddHandler(Func<RemoteResponse, bool> handler);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Sample.Infrastructure.Remoting.Communication
 {
-    public interface ISender<TMessage> where TMessage : IRemoteMessage
+    public interface ISender<TInterface>
     {
-        void Send(TMessage message);
+        void Send(RemoteRequest message);
     }
 }

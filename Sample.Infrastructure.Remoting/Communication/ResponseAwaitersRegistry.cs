@@ -3,7 +3,7 @@ using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Communication
 {
-    internal class ResponseAwaitersRegistry<TResponse>
+    public class ResponseAwaitersRegistry<TResponse>
         where TResponse : IRemoteMessage
     {
         private readonly ConcurrentDictionary<string, ResponseAwaiter<TResponse>> _responseAwaiters;

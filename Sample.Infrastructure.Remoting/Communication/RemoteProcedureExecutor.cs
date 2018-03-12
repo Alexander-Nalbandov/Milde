@@ -4,15 +4,13 @@ using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Communication
 {
-    internal class RemoteProcedureExecutor<TRequest, TResponse>
-        where TRequest : IRemoteMessage
-        where TResponse : IRemoteMessage
+    public class RemoteProcedureExecutor<TInterface>
     {
-        private readonly ResponseAwaitersRegistry<TResponse> _awaitersRegistry;
-        private readonly ISender<TRequest> _sender;
-        private readonly IListener<TResponse> _responseListener;
+        private readonly ResponseAwaitersRegistry<RemoteResponse> _awaitersRegistry;
+        private readonly ISender<TInterface> _sender;
+        private readonly IListener<TInterface> _responseListener;
 
-        public RemoteProcedureExecutor(ResponseAwaitersRegistry<TResponse> awaitersRegistry, ISender<TRequest> sender, IListener<TResponse> responseListener)
+        public RemoteProcedureExecutor(ResponseAwaitersRegistry<RemoteResponse> awaitersRegistry, ISender<TInterface> sender, IListener<TInterface> responseListener)
         {
             _awaitersRegistry = awaitersRegistry;
             _sender = sender;
@@ -20,7 +18,7 @@ namespace Sample.Infrastructure.Remoting.Communication
             this._responseListener.AddHandler(this.HandleResponse);
         }
 
-        public async Task<TResponse> Execute(TRequest request, string routingKey)
+        public async Task<RemoteResponse> Execute(RemoteRequest request, string routingKey)
         {
             var awaiter = this._awaitersRegistry.Register();
             request.Headers.CorrelationId = awaiter.CorrelationId;
@@ -31,7 +29,7 @@ namespace Sample.Infrastructure.Remoting.Communication
             return response;
         }
 
-        private bool HandleResponse(TResponse response)
+        private bool HandleResponse(RemoteResponse response)
         {
             var responseAwaiter = this._awaitersRegistry.Get(response.Headers.CorrelationId);
             if (responseAwaiter == null)

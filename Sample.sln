@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ConsoleServer", "Sample\Sample.ConsoleServer.csproj", "{524A042A-777D-4B8C-9A50-73FCDF67BEE0}"
 EndProject
@@ -19,13 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting", "Sample.Infrastructure.Remoting\Sample.Infrastructure.Remoting.csproj", "{BB2F880F-509E-4BCA-A91D-988E4B5AE767}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting.RabbitMq", "Sample.Infrastructure.Remoting.RabbitMq\Sample.Infrastructure.Remoting.RabbitMq.csproj", "{78BA3748-E9F4-443B-A9AC-71C8E1C69323}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting.Rabbit", "Sample.Infrastructure.Remoting.RabbitMq\Sample.Infrastructure.Remoting.Rabbit.csproj", "{78BA3748-E9F4-443B-A9AC-71C8E1C69323}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{640E6D1A-9F7D-4282-9531-54626421CEA4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ConsoleClient", "Sample.ConsoleClient\Sample.ConsoleClient.csproj", "{1E680DB6-52B7-4F1D-B964-909C2BD2E6EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.WebApplication", "Sample.WebApplication\Sample.WebApplication.csproj", "{5DAC511C-F40B-4B13-82E2-B2A3243093A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.WebApplication", "Sample.WebApplication\Sample.WebApplication.csproj", "{5DAC511C-F40B-4B13-82E2-B2A3243093A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

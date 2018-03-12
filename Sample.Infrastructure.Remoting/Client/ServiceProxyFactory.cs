@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Sample.Infrastructure.Remoting.Communication;
+﻿using Sample.Infrastructure.Remoting.Communication;
 
 namespace Sample.Infrastructure.Remoting.Client
 {
     public class ServiceProxyFactory
     {
-        public static TInterface Create<TInterface>()
+        public static TInterface Create<TInterface>(RemoteProcedureExecutor<TInterface> executor)
         {
-            var proxy = new ServiceProxy<TInterface>(new RemoteProcedureExecutor<RemoteRequest, RemoteResponse>());
-            proxy
+            return ServiceProxy<TInterface>.Create(executor);
         }
     }
 }

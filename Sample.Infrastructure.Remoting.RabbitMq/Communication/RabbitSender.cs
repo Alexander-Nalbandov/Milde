@@ -1,31 +1,31 @@
 using RabbitMQ.Client;
 using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Contracts;
+using Sample.Infrastructure.Remoting.Rabbit.Communication;
 using Sample.Infrastructure.Remoting.Serialization;
 
-namespace Sample.Infrastructure.Remoting.RabbitMq
+namespace Sample.Infrastructure.Remoting.Rabbit.Communication
 {
-    internal class RabbitMqSender<TMessage> : ISender<TMessage> where TMessage : IRemoteMessage
+    internal class RabbitSender<TInterface> : ISender<TInterface>
     {
         private readonly IModel _channel;
         private readonly string _exchange;
         private readonly ISerializer _serializer;
 
-        public RabbitMqSender(IModel channel, string exchange, ISerializer serializer)
+        public RabbitSender(RabbitConnectionFactory connectionFactory, ISerializer serializer, string exchange)
         {
-            this._channel = channel;
+            this._channel = connectionFactory.Connect();
             this._exchange = exchange;
             this._serializer = serializer;
         }
 
-        public void Send(TMessage message)
+        public void Send(RemoteRequest message)
         {
             var body = this._serializer.Serialize(message);
             var props = this._channel.CreateBasicProperties();
-            props.SetFrom(message.Headers);
+            Rabbit.Extensions.SetFrom(props, message.Headers);
 
-            this._channel.BasicPublish(
-                exchange: this._exchange,
+            IModelExensions.BasicPublish(this._channel, exchange: this._exchange,
                 routingKey: message.Headers.RoutingKey,
                 basicProperties: props,
                 body: body

@@ -1,7 +1,7 @@
 using RabbitMQ.Client;
 using Sample.Infrastructure.Remoting.Contracts;
 
-namespace Sample.Infrastructure.Remoting.RabbitMq
+namespace Sample.Infrastructure.Remoting.Rabbit
 {
     internal static class Extensions
     {
@@ -9,6 +9,7 @@ namespace Sample.Infrastructure.Remoting.RabbitMq
         {
             if (properties == null || props == null)
                 return;
+
 
             if (!string.IsNullOrEmpty(properties.CorrelationId))
                 props.CorrelationId = properties.CorrelationId;

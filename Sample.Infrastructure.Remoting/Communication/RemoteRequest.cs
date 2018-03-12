@@ -3,7 +3,7 @@ using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Communication
 {
-    internal class RemoteRequest : IRemoteMessage
+    public class RemoteRequest : IRemoteMessage
     {
         [JsonConstructor]
         public RemoteRequest(string methodName, object[] args)

@@ -4,7 +4,7 @@ using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Communication
 {
-    internal class ResponseAwaiter<TResponse>
+    public class ResponseAwaiter<TResponse>
         where TResponse : IRemoteMessage
     {
         private readonly TaskCompletionSource<TResponse> _completionSource;

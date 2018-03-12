@@ -8,11 +8,23 @@ namespace Sample.Infrastructure.Remoting.Client
 {
     internal class ServiceProxy<TInterface> : DispatchProxy
     {
-        private readonly RemoteProcedureExecutor<RemoteRequest, RemoteResponse> _executor;
+        private RemoteProcedureExecutor<TInterface> _executor;
 
-        public ServiceProxy(RemoteProcedureExecutor<RemoteRequest, RemoteResponse> executor)
+        public ServiceProxy()
+        {
+            
+        }
+
+        private void SetExecutor(RemoteProcedureExecutor<TInterface> executor)
         {
             _executor = executor;
+        }
+
+        public static TInterface Create(RemoteProcedureExecutor<TInterface> executor)
+        {
+            object proxy = Create<TInterface, ServiceProxy<TInterface>>();
+            ((ServiceProxy<TInterface>) proxy).SetExecutor(executor);
+            return (TInterface) proxy;
         }
 
         protected override object Invoke(MethodInfo method, object[] args)
