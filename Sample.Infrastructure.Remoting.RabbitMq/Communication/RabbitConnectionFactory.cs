@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using System;
+using RabbitMQ.Client;
 using Sample.Infrastructure.Remoting.Rabbit.Configuration;
 
 namespace Sample.Infrastructure.Remoting.Rabbit.Communication
@@ -11,7 +12,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
         {
             _connectionFactory = new ConnectionFactory
             {
-                Uri = config.Address,
+                Uri = new Uri(config.Address),
                 UserName = config.Username,
                 Password = config.Password,
                 VirtualHost = config.VirtualHost,
