@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using Autofac;
 using Microsoft.Extensions.Configuration;
 using Sample.Infrastructure.Remoting.RabbitMq;
+using Sample.UserManagement.Contract;
 
 namespace Sample.ConsoleClient
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
 
             var configBuilder = new ConfigurationBuilder();
-            configBuilder.AddInMemoryCollection(new Dictionary<string, string>()
+            configBuilder.AddInMemoryCollection(new Dictionary<string, string>
             {
                 {"rabbit_url", "amqp://localhost:1526"}
             });
@@ -23,7 +24,11 @@ namespace Sample.ConsoleClient
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            builder.WithRabbitRemoting();
+            builder.WithRabbitRemoting(configurator =>
+                {
+                    configurator.Register<IUserManagementService>();
+                }
+            );
 
             builder.Build();
         }

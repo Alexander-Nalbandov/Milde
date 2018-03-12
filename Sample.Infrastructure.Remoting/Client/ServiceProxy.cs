@@ -6,7 +6,7 @@ using Sample.Infrastructure.Remoting.Communication;
 
 namespace Sample.Infrastructure.Remoting.Client
 {
-    class ServiceProxy<TInterface> : DispatchProxy
+    internal class ServiceProxy<TInterface> : DispatchProxy
     {
         private readonly RemoteProcedureExecutor<RemoteRequest, RemoteResponse> _executor;
 
