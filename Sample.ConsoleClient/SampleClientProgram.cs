@@ -2,7 +2,6 @@
 using Autofac;
 using Microsoft.Extensions.Configuration;
 using Sample.Infrastructure.Remoting.Rabbit.Registration;
-using Sample.Infrastructure.Remoting.RabbitMq.Registration;
 using Sample.UserManagement.Contract;
 
 namespace Sample.ConsoleClient
@@ -26,7 +25,7 @@ namespace Sample.ConsoleClient
 
             builder.WithRabbitRemoting(configurator =>
                 {
-                    configurator.Register<IUserManagementService>();
+                    configurator.RegisterProxy<IUserManagementService>();
                 }
             );
 
@@ -38,7 +37,7 @@ namespace Sample.ConsoleClient
             var configBuilder = new ConfigurationBuilder();
             configBuilder.AddInMemoryCollection(new Dictionary<string, string>
             {
-                {"rabbit:address", "amqp://localhost:1526"},
+                {"rabbit:address", "amqp://localhost:5672"},
                 {"rabbit:username", "username"},
                 {"rabbit:password", "password"},
                 {"rabbit:vhost", "/"},

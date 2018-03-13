@@ -1,6 +1,5 @@
 using System;
 using Autofac;
-using Sample.Infrastructure.Remoting.RabbitMq.Registration;
 
 namespace Sample.Infrastructure.Remoting.Rabbit.Registration
 {

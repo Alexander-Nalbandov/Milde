@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Sample.UserManagement.Contract
 {
     public interface IUserManagementService
     {
-        void CreateUser(string name);
-        void ChangeUserName(Guid aggregateId, string name);
+        Task<UserDto> CreateUser(string name);
+        Task<UserDto> ChangeUserName(Guid aggregateId, string name);
     }
 }

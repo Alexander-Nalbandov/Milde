@@ -10,6 +10,7 @@ namespace Sample.Infrastructure.Remoting.Communication
         {
             MethodName = methodName;
             Args = args;
+            Headers = new MessageHeaders();
         }
 
         public RemoteRequest(string methodName, object[] args, MessageHeaders headers)

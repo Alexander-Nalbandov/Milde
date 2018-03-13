@@ -1,5 +1,5 @@
 ﻿using System;
-using Sample.Infrastructure.Remoting.RabbitMq;
+using Sample.Infrastructure.Remoting.Rabbit;
 
 namespace Sample.ConsoleClient
 {

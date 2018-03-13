@@ -7,10 +7,10 @@ namespace Sample.Infrastructure.Remoting.Communication
     public class RemoteProcedureExecutor<TInterface>
     {
         private readonly ResponseAwaitersRegistry<RemoteResponse> _awaitersRegistry;
-        private readonly ISender<TInterface> _sender;
-        private readonly IListener<TInterface> _responseListener;
+        private readonly ISender<TInterface, RemoteRequest> _sender;
+        private readonly IListener<TInterface, RemoteResponse> _responseListener;
 
-        public RemoteProcedureExecutor(ResponseAwaitersRegistry<RemoteResponse> awaitersRegistry, ISender<TInterface> sender, IListener<TInterface> responseListener)
+        public RemoteProcedureExecutor(ResponseAwaitersRegistry<RemoteResponse> awaitersRegistry, ISender<TInterface, RemoteRequest> sender, IListener<TInterface, RemoteResponse> responseListener)
         {
             _awaitersRegistry = awaitersRegistry;
             _sender = sender;

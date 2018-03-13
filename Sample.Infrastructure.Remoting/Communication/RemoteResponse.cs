@@ -9,6 +9,7 @@ namespace Sample.Infrastructure.Remoting.Communication
         {
             this.ResponseType = response.GetType().FullName;
             this.Response = response;
+            Headers = new MessageHeaders();
         }
 
         [JsonConstructor]
@@ -16,6 +17,7 @@ namespace Sample.Infrastructure.Remoting.Communication
         {
             ResponseType = responseType;
             Response = response;
+            Headers = new MessageHeaders();
         }
 
         public string ResponseType { get; }

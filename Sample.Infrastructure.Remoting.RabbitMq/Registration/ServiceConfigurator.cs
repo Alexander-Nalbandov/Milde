@@ -2,9 +2,8 @@ using Autofac;
 using Sample.Infrastructure.Remoting.Client;
 using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Rabbit.Communication;
-using Sample.Infrastructure.Remoting.Serialization;
 
-namespace Sample.Infrastructure.Remoting.RabbitMq.Registration
+namespace Sample.Infrastructure.Remoting.Rabbit.Registration
 {
     public class ServiceConfigurator
     {
@@ -15,21 +14,23 @@ namespace Sample.Infrastructure.Remoting.RabbitMq.Registration
             _builder = builder;
         }
 
-        public void Register<TInterface>()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TInterface"></typeparam>
+        public void RegisterProxy<TInterface>()
         {
+            _builder.RegisterType<RabbitListener<TInterface, RemoteResponse>>()
+                .WithParameter("exchange", "RPC-Response")
+                .AsSelf().AsImplementedInterfaces().SingleInstance();
+            _builder.RegisterType<RabbitSender<TInterface, RemoteRequest>>()
+                .WithParameter("exchange", "RPC-Request")
+                .AsSelf().AsImplementedInterfaces().SingleInstance();
+            _builder.RegisterType<RemoteProcedureExecutor<TInterface>>()
+                .AsSelf().SingleInstance();
             _builder.Register(cc =>
-                    {
-                        var factory = cc.Resolve<RabbitConnectionFactory>();
-                        var serializer = cc.Resolve<ISerializer>();
-                        var listener = new RabbitListener<TInterface>(factory, serializer, typeof(TInterface).Name);
-                        var sender = new RabbitSender<TInterface>(factory, serializer, "RPC");
-                        return ServiceProxyFactory.Create<TInterface>(
-                            new RemoteProcedureExecutor<TInterface>(cc.Resolve<ResponseAwaitersRegistry<RemoteResponse>>(),
-                            sender, listener));
-                    }
-                )
-                .AsImplementedInterfaces()
-                .SingleInstance();
+                    ServiceProxyFactory.Create<TInterface>(cc.Resolve<RemoteProcedureExecutor<TInterface>>()))
+                .AsImplementedInterfaces().SingleInstance();
         }
     }
 }

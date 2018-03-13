@@ -6,7 +6,7 @@ using Sample.Infrastructure.Remoting.Communication;
 
 namespace Sample.Infrastructure.Remoting.Client
 {
-    internal class ServiceProxy<TInterface> : DispatchProxy
+    public class ServiceProxy<TInterface> : DispatchProxy
     {
         private RemoteProcedureExecutor<TInterface> _executor;
 
@@ -20,7 +20,7 @@ namespace Sample.Infrastructure.Remoting.Client
             _executor = executor;
         }
 
-        public static TInterface Create(RemoteProcedureExecutor<TInterface> executor)
+        internal static TInterface Create(RemoteProcedureExecutor<TInterface> executor)
         {
             object proxy = Create<TInterface, ServiceProxy<TInterface>>();
             ((ServiceProxy<TInterface>) proxy).SetExecutor(executor);
