@@ -17,5 +17,8 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Configuration
         public string Username { get; }
         public string Password { get; }
         public string VirtualHost { get; }
+
+        public const string ResponseExchange = "RPC-Response";
+        public const string RequestExchange = "RPC-Request";
     }
 }

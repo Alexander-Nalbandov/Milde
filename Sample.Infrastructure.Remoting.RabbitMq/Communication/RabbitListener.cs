@@ -65,6 +65,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
         public void Start()
         {
             _channel = _factory.Connect();
+            this._channel.ExchangeDeclare(_exchange, "topic", durable: true);
             this._channel.QueueDeclare(this._queue, durable: true);
             this._channel.QueueBind(this._queue, this._exchange, $"{this._serviceName}.*");
             StartPolling();

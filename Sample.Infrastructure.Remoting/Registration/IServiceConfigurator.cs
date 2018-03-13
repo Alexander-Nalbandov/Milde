@@ -8,6 +8,6 @@ namespace Sample.Infrastructure.Remoting.Registration
         /// <typeparam name="TInterface"></typeparam>
         void RegisterProxy<TInterface>();
 
-        void RegisterService<TImlementation, TInterface>();
+        void RegisterService<TImplementation, TInterface>() where TImplementation : TInterface;
     }
 }
