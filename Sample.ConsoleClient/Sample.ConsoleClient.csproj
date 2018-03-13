@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Sample.Infrastructure.Remoting.RabbitMq\Sample.Infrastructure.Remoting.Rabbit.csproj" />
     <ProjectReference Include="..\Sample.UserManagement.Contract\Sample.UserManagement.Contract.csproj" />
+    <ProjectReference Include="..\Sample.UserManagement\Sample.UserManagement.csproj" />
   </ItemGroup>
 
 </Project>

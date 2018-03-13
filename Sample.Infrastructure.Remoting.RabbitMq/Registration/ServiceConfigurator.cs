@@ -2,10 +2,11 @@ using Autofac;
 using Sample.Infrastructure.Remoting.Client;
 using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Rabbit.Communication;
+using Sample.Infrastructure.Remoting.Registration;
 
 namespace Sample.Infrastructure.Remoting.Rabbit.Registration
 {
-    public class ServiceConfigurator
+    public class ServiceConfigurator : IServiceConfigurator
     {
         private readonly ContainerBuilder _builder;
 
@@ -31,6 +32,11 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Registration
             _builder.Register(cc =>
                     ServiceProxyFactory.Create<TInterface>(cc.Resolve<RemoteProcedureExecutor<TInterface>>()))
                 .AsImplementedInterfaces().SingleInstance();
+        }
+
+        public void RegisterService<TImlementation, TInterface>()
+        {
+
         }
     }
 }

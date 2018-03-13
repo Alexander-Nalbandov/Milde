@@ -3,6 +3,7 @@ using Autofac;
 using Microsoft.Extensions.Configuration;
 using Sample.Infrastructure.Remoting.Rabbit.Registration;
 using Sample.UserManagement.Contract;
+using Sample.UserManagement.Handlers;
 
 namespace Sample.ConsoleClient
 {
@@ -26,6 +27,7 @@ namespace Sample.ConsoleClient
             builder.WithRabbitRemoting(configurator =>
                 {
                     configurator.RegisterProxy<IUserManagementService>();
+                    configurator.RegisterService<UserManagementService, IUserManagementService>();
                 }
             );
 
