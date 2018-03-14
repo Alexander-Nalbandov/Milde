@@ -37,7 +37,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
         public void Start()
         {
             _channel = _factory.Connect();
-            _channel.ExchangeDeclare(_exchange, "topic", true);
+            _channel.ExchangeDeclare(_exchange, "topic", true, autoDelete: false);
         }
     }
 }

@@ -3,16 +3,15 @@ using AutoMapper;
 using Sample.UserManagement.Contract;
 using Sample.UserManagement.Domain;
 
-namespace Sample.ConsoleClient
+namespace Sample.ConsoleServer
 {
-    internal class Program
+    class Program
     {
-        private static void Main()
+        static void Main(string[] args)
         {
-            Console.WriteLine("Client has started.");
+            Console.WriteLine("Server has started.");
             Mapper.Initialize(cfg => cfg.CreateMap<User, UserDto>());
-
-            new SampleClientProgram().Run();
+            new SampleServerProgram().Run();
         }
     }
 }

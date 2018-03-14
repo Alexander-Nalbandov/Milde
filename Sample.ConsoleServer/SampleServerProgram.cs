@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Autofac;
 using Microsoft.Extensions.Configuration;
 using Sample.Infrastructure.Remoting.Rabbit.Registration;
@@ -7,21 +8,16 @@ using Sample.UserManagement.Contract;
 using Sample.UserManagement.Handlers;
 using Serilog;
 
-namespace Sample.ConsoleClient
+namespace Sample.ConsoleServer
 {
-    internal class SampleClientProgram
+    class SampleServerProgram
     {
         public void Run()
         {
             var cfg = BuildConfiguration();
             var container = ConfigureContainer(cfg);
-            var service = container.Resolve<IUserManagementService>();
-            while (true)
-            {
-                var name = Console.ReadLine();
-                var a = service.CreateUser(name).Result;
-                Console.WriteLine($"Created {a}");
-            }
+
+            Console.ReadKey();
         }
 
         public IContainer ConfigureContainer(IConfiguration config)
@@ -33,7 +29,7 @@ namespace Sample.ConsoleClient
 
             builder.WithRabbitRemoting(configurator =>
                 {
-                    configurator.RegisterProxy<IUserManagementService>();
+                    configurator.RegisterService<UserManagementService, IUserManagementService>();
                 }
             );
 

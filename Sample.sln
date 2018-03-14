@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ConsoleServer", "Sample\Sample.ConsoleServer.csproj", "{524A042A-777D-4B8C-9A50-73FCDF67BEE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ConsoleServer", "Sample.ConsoleServer\Sample.ConsoleServer.csproj", "{524A042A-777D-4B8C-9A50-73FCDF67BEE0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.WebClient", "Sample.Client\Sample.WebClient.csproj", "{2E59FCBA-4518-40B6-AE2B-19089355EA88}"
 EndProject
