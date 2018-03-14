@@ -1,4 +1,5 @@
 using Autofac;
+using Sample.Infrastructure.Remoting.Client;
 using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Rabbit.Communication;
 using Sample.Infrastructure.Remoting.Rabbit.Configuration;
@@ -14,6 +15,8 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Registration
                 .AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<JsonSerializer>()
                 .AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<ResponseConverter>()
+                .AsSelf().SingleInstance();
             builder.RegisterType<RabbitConfiguration>()
                 .AsSelf().SingleInstance();
             builder.RegisterType<RabbitConnectionFactory>()

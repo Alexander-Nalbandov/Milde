@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Sample.Infrastructure.Remoting.Rabbit;
+using AutoMapper;
 using Sample.UserManagement.Contract;
-using Sample.UserManagement.Handlers;
-using static System.Linq.Expressions.Expression;
+using Sample.UserManagement.Domain;
 
 namespace Sample.ConsoleClient
 {
@@ -13,19 +10,9 @@ namespace Sample.ConsoleClient
         private static void Main()
         {
             Console.WriteLine("Hello World!");
+            Mapper.Initialize(cfg => cfg.CreateMap<User, UserDto>());
 
-            object[] args = {"asdasd"};
-            var instance = new UserManagementService();
-            var methodInfo = typeof(IUserManagementService).GetMethod("CreateUser");
-            var instanseExpr = Constant(instance);
-
-            ParameterExpression[] parameters = methodInfo.GetParameters().Select(e => Parameter(e.ParameterType)).ToArray();
-            var methodCallExpression = Call(instanseExpr, methodInfo, parameters);
-            var funcExpr = Lambda<Func<object[], dynamic>>(methodCallExpression, parameters);
-            var func = funcExpr.Compile();
-            var result = func(args);
-
-            //new SampleClientProgram().Run();
+            new SampleClientProgram().Run();
         }
     }
 }

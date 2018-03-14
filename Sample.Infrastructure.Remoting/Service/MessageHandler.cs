@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Autofac;
 using Sample.Infrastructure.Remoting.Communication;
+using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Service
 {
     public class MessageHandler<TImplementation, TInterface> : IStartable where TImplementation : TInterface
     {
+        private readonly TImplementation _instance;
         private readonly IListener<TInterface, RemoteRequest> _listener;
         private readonly ISender<TInterface, RemoteResponse> _sender;
-        private readonly TImplementation _instance;
 
-        public MessageHandler(IListener<TInterface, RemoteRequest> listener, ISender<TInterface, RemoteResponse> sender, TImplementation instance)
+        public MessageHandler(IListener<TInterface, RemoteRequest> listener, ISender<TInterface, RemoteResponse> sender,
+            TImplementation instance)
         {
             _instance = instance;
             _listener = listener;
@@ -26,13 +27,44 @@ namespace Sample.Infrastructure.Remoting.Service
 
         private bool HandleRequest(RemoteRequest request)
         {
-            var methodInfo = typeof(TInterface).GetMethod(request.MethodName);
-            var instanse = Expression.Constant(_instance);
-            ParameterExpression[] parameters = methodInfo.GetParameters().Select(e => Expression.Parameter(e.ParameterType)).ToArray();
-            var methodCallExpression = Expression.Call(instanse, methodInfo, parameters);
-            var funcExpr = Expression.Lambda<Func<object[], dynamic>>(methodCallExpression, parameters).Compile();
-            var result = funcExpr(request.Args);
+            var response = this.GetResponse(request.MethodName, request.Args);
+
+            this.SendResponse(response, request.Headers);
+
             return true;
+        }
+
+        private object GetResponse(string methodName, object[] args)
+        {
+            var method = typeof(TInterface).GetMethod(methodName);
+
+            if (method == null)
+            {
+                throw new MissingMethodException(typeof(TInterface).Name, methodName);
+            }
+
+            if (!typeof(Task).IsAssignableFrom(method.ReturnType))
+            {
+                throw new InvalidOperationException("Rabbit MQ message handler supports only asynchronous methods.");
+            }
+
+            if (!method.ReturnType.IsGenericType)
+            {
+                throw new InvalidOperationException("Rabbit MQ message handler doesn't support VOID methods.");
+            }
+
+            var result = method.Invoke(_instance, args);
+            var asyncResult = ((Task)result).GetType().GetProperty("Result")?.GetValue(result);
+            return asyncResult;
+        }
+
+        private void SendResponse(object response, MessageHeaders requestHeaders)
+        {
+            var msg = new RemoteResponse(response)
+            {
+                Headers = { CorrelationId = requestHeaders.CorrelationId, RoutingKey = requestHeaders.RoutingKey}
+            };
+            _sender.Send(msg);
         }
     }
 }

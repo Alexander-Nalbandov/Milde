@@ -9,10 +9,10 @@ namespace Sample.Infrastructure.Remoting.Client
     public class ServiceProxy<TInterface> : DispatchProxy
     {
         private RemoteProcedureExecutor<TInterface> _executor;
+        private ResponseConverter _converter;
 
         public ServiceProxy()
         {
-            
         }
 
         private void SetExecutor(RemoteProcedureExecutor<TInterface> executor)
@@ -20,14 +20,20 @@ namespace Sample.Infrastructure.Remoting.Client
             _executor = executor;
         }
 
-        internal static TInterface Create(RemoteProcedureExecutor<TInterface> executor)
+        private void SetConverter(ResponseConverter converter)
+        {
+            _converter = converter;
+        }
+
+        internal static TInterface Create(RemoteProcedureExecutor<TInterface> executor, ResponseConverter converter)
         {
             object proxy = Create<TInterface, ServiceProxy<TInterface>>();
             ((ServiceProxy<TInterface>) proxy).SetExecutor(executor);
+            ((ServiceProxy<TInterface>) proxy).SetConverter(converter);
             return (TInterface) proxy;
         }
 
-        protected override object Invoke(MethodInfo method, object[] args)
+        protected override dynamic Invoke(MethodInfo method, object[] args)
         {
             if (!typeof(Task).IsAssignableFrom(method.ReturnType))
             {
@@ -42,8 +48,8 @@ namespace Sample.Infrastructure.Remoting.Client
             var request = new RemoteRequest(method.Name, args);
             var routingKey = this.GetRoutingKey(method.Name);
             var response = this._executor.Execute(request, routingKey).Result;
-            var convertedResponse = Convert.ChangeType(response.Response, method.ReturnType.GetGenericArguments().First());
-            return Task.FromResult(convertedResponse); //TODO steal more code from retention tool if necessary
+            var convertedResponse = _converter.Convert(response.Response, method.ReturnType.GetGenericArguments().First());
+            return convertedResponse; 
         }
 
         private string GetRoutingKey(string methodName)

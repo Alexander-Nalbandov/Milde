@@ -13,11 +13,11 @@ namespace Sample.Infrastructure.Remoting.Communication
         }
 
         [JsonConstructor]
-        public RemoteResponse(string responseType, object response)
+        public RemoteResponse(string responseType, object response, MessageHeaders headers)
         {
             ResponseType = responseType;
             Response = response;
-            Headers = new MessageHeaders();
+            Headers = headers;
         }
 
         public string ResponseType { get; }

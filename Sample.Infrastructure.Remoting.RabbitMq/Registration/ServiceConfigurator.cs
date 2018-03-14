@@ -32,7 +32,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Registration
             _builder.RegisterType<RemoteProcedureExecutor<TInterface>>()
                 .AsSelf().SingleInstance();
             _builder.Register(cc =>
-                    ServiceProxyFactory.Create<TInterface>(cc.Resolve<RemoteProcedureExecutor<TInterface>>()))
+                    ServiceProxyFactory.Create<TInterface>(cc.Resolve<RemoteProcedureExecutor<TInterface>>(), cc.Resolve<ResponseConverter>()))
                 .AsImplementedInterfaces().SingleInstance();
         }
 

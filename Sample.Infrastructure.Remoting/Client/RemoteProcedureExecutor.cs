@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Sample.Infrastructure.Remoting.Contracts;
+using Sample.Infrastructure.Remoting.Communication;
 
-namespace Sample.Infrastructure.Remoting.Communication
+namespace Sample.Infrastructure.Remoting.Client
 {
     public class RemoteProcedureExecutor<TInterface>
     {
@@ -15,6 +15,7 @@ namespace Sample.Infrastructure.Remoting.Communication
             _awaitersRegistry = awaitersRegistry;
             _sender = sender;
             _responseListener = responseListener;
+
             this._responseListener.AddHandler(this.HandleResponse);
         }
 

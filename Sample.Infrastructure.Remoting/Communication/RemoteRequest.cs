@@ -5,7 +5,6 @@ namespace Sample.Infrastructure.Remoting.Communication
 {
     public class RemoteRequest : IRemoteMessage
     {
-        [JsonConstructor]
         public RemoteRequest(string methodName, object[] args)
         {
             MethodName = methodName;
@@ -13,6 +12,7 @@ namespace Sample.Infrastructure.Remoting.Communication
             Headers = new MessageHeaders();
         }
 
+        [JsonConstructor]
         public RemoteRequest(string methodName, object[] args, MessageHeaders headers)
         {
             MethodName = methodName;
