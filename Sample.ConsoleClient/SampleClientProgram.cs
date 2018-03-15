@@ -49,7 +49,7 @@ namespace Sample.ConsoleClient
             configBuilder.AddInMemoryCollection(new Dictionary<string, string>
             {
                 {"rabbit:address", "amqp://localhost:5672"},
-                {"rabbit:username", "username"},
+                {"rabbit:username", "client"},
                 {"rabbit:password", "password"},
                 {"rabbit:vhost", "/"},
             });

@@ -45,7 +45,7 @@ namespace Sample.ConsoleServer
             configBuilder.AddInMemoryCollection(new Dictionary<string, string>
             {
                 {"rabbit:address", "amqp://localhost:5672"},
-                {"rabbit:username", "username"},
+                {"rabbit:username", "server"},
                 {"rabbit:password", "password"},
                 {"rabbit:vhost", "/"},
             });

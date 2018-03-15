@@ -32,10 +32,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
 
         public void StartPolling()
         {
-            _channel.BasicConsume(_queue,
-                true,
-                _consumer
-            );
+            _channel.BasicConsume(_consumer, _queue);
         }
 
         public void AddHandler(Func<TMessage, bool> handler)
@@ -66,7 +63,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
         {
             _channel = _factory.Connect();
             this._channel.ExchangeDeclare(_exchange, "topic", durable: true, autoDelete: false);
-            this._channel.QueueDeclare(this._queue, durable: true, autoDelete: true, exclusive: false);
+            this._channel.QueueDeclare(this._queue, durable: true, autoDelete: false, exclusive: false);
             this._channel.QueueBind(this._queue, this._exchange, $"{this._serviceName}.*");
             StartPolling();
         }
