@@ -2,23 +2,21 @@
 using Autofac;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Contracts;
 using Sample.Infrastructure.Remoting.Serialization;
 
 namespace Sample.Infrastructure.Remoting.Rabbit.Communication
 {
-    internal class RabbitListener<TInterface, TMessage> : IListener<TInterface, TMessage>, IStartable where TMessage : IRemoteMessage
+    internal class RabbitListener<TInterface, TMessage> : IListener<TInterface, TMessage>, IStartable
+        where TMessage : IRemoteMessage
     {
-        private IModel _channel;
         private readonly EventingBasicConsumer _consumer;
-
-        private string _queue => $"{this._exchange}.{this._serviceName}";
+        private readonly string _exchange;
+        private readonly RabbitConnectionFactory _factory;
+        private readonly ISerializer _serializer;
 
         private readonly string _serviceName;
-        private readonly string _exchange;
-        private readonly ISerializer _serializer;
-        private readonly RabbitConnectionFactory _factory;
+        private IModel _channel;
 
 
         public RabbitListener(RabbitConnectionFactory connectionFactory, ISerializer serializer, string exchange)
@@ -30,6 +28,8 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
             _serviceName = typeof(TInterface).Name;
         }
 
+        private string _queue => $"{_exchange}.{_serviceName}";
+
         public void StartPolling()
         {
             _channel.BasicConsume(_consumer, _queue);
@@ -38,6 +38,15 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
         public void AddHandler(Func<TMessage, bool> handler)
         {
             AddHandler(args => true, (msg, args) => handler(msg));
+        }
+
+        public void Start()
+        {
+            _channel = _factory.Connect();
+            _channel.ExchangeDeclare(_exchange, "topic", true, false);
+            _channel.QueueDeclare(_queue, true, autoDelete: false, exclusive: false);
+            _channel.QueueBind(_queue, _exchange, $"{_serviceName}.*");
+            StartPolling();
         }
 
         public void AddHandler(Func<TMessage, BasicDeliverEventArgs, bool> handler)
@@ -57,15 +66,6 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
                 if (handler(response, args))
                     _channel.BasicAck(args.DeliveryTag, false);
             };
-        }
-
-        public void Start()
-        {
-            _channel = _factory.Connect();
-            this._channel.ExchangeDeclare(_exchange, "topic", durable: true, autoDelete: false);
-            this._channel.QueueDeclare(this._queue, durable: true, autoDelete: false, exclusive: false);
-            this._channel.QueueBind(this._queue, this._exchange, $"{this._serviceName}.*");
-            StartPolling();
         }
     }
 }

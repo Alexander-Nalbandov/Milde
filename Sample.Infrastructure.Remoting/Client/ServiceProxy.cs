@@ -8,12 +8,8 @@ namespace Sample.Infrastructure.Remoting.Client
 {
     public class ServiceProxy<TInterface> : DispatchProxy
     {
-        private RemoteProcedureExecutor<TInterface> _executor;
         private ResponseConverter _converter;
-
-        public ServiceProxy()
-        {
-        }
+        private RemoteProcedureExecutor<TInterface> _executor;
 
         private void SetExecutor(RemoteProcedureExecutor<TInterface> executor)
         {
@@ -36,20 +32,17 @@ namespace Sample.Infrastructure.Remoting.Client
         protected override dynamic Invoke(MethodInfo method, object[] args)
         {
             if (!typeof(Task).IsAssignableFrom(method.ReturnType))
-            {
                 throw new InvalidOperationException("ServiceProxy supports only asynchronous methods.");
-            }
 
             if (!method.ReturnType.IsGenericType)
-            {
                 throw new InvalidOperationException("ServiceProxy doesn't support VOID methods.");
-            }
 
             var request = new RemoteRequest(method.Name, args);
-            var routingKey = this.GetRoutingKey(method.Name);
-            var response = this._executor.Execute(request, routingKey).Result;
-            var convertedResponse = _converter.Convert(response.Response, method.ReturnType.GetGenericArguments().First());
-            return convertedResponse; 
+            var routingKey = GetRoutingKey(method.Name);
+            var response = _executor.Execute(request, routingKey).Result;
+            var convertedResponse =
+                _converter.Convert(response.Response, method.ReturnType.GetGenericArguments().First());
+            return convertedResponse;
         }
 
         private string GetRoutingKey(string methodName)

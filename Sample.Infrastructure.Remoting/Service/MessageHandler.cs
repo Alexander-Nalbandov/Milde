@@ -6,7 +6,7 @@ using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Service
 {
-    public class MessageHandler<TImplementation, TInterface> : IStartable where TImplementation : TInterface
+    internal class MessageHandler<TImplementation, TInterface> : IStartable where TImplementation : TInterface
     {
         private readonly TImplementation _instance;
         private readonly IListener<TInterface, RemoteRequest> _listener;
@@ -45,12 +45,12 @@ namespace Sample.Infrastructure.Remoting.Service
 
             if (!typeof(Task).IsAssignableFrom(method.ReturnType))
             {
-                throw new InvalidOperationException("Rabbit MQ message handler supports only asynchronous methods.");
+                throw new InvalidOperationException("Message handler supports only asynchronous methods.");
             }
 
             if (!method.ReturnType.IsGenericType)
             {
-                throw new InvalidOperationException("Rabbit MQ message handler doesn't support VOID methods.");
+                throw new InvalidOperationException("Message handler doesn't support VOID methods.");
             }
 
             var result = method.Invoke(_instance, args);
