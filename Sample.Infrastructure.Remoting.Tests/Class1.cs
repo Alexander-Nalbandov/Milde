@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sample.Infrastructure.Remoting.Tests
+﻿namespace Sample.Infrastructure.Remoting.Tests
 {
     public class Class1
     {
