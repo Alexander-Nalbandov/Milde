@@ -1,6 +1,4 @@
-﻿using Sample.Infrastructure.Remoting.Contracts;
-
-namespace Sample.Infrastructure.Remoting.Communication
+﻿namespace Sample.Infrastructure.Remoting.Contracts
 {
     public interface ISender<TInterface, in TMessage> where TMessage : IRemoteMessage
     {

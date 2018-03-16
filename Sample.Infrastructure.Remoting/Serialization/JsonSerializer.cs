@@ -4,7 +4,7 @@ using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Serialization
 {
-    public class JsonSerializer : ISerializer
+    internal class JsonSerializer : ISerializer
     {
         private readonly Encoding _encoding;
 

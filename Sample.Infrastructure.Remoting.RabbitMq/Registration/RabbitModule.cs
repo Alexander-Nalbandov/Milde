@@ -1,9 +1,7 @@
 using Autofac;
-using Sample.Infrastructure.Remoting.Client;
-using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Rabbit.Communication;
 using Sample.Infrastructure.Remoting.Rabbit.Configuration;
-using Sample.Infrastructure.Remoting.Serialization;
+using Sample.Infrastructure.Remoting.Registration;
 
 namespace Sample.Infrastructure.Remoting.Rabbit.Registration
 {
@@ -11,12 +9,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Registration
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ResponseAwaitersRegistry<RemoteResponse>>()
-                .AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<JsonSerializer>()
-                .AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<ResponseConverter>()
-                .AsSelf().SingleInstance();
+            builder.RegisterModule<RemotingModule>();
             builder.RegisterType<RabbitConfiguration>()
                 .AsSelf().SingleInstance();
             builder.RegisterType<RabbitConnectionFactory>()

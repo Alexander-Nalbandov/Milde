@@ -3,7 +3,7 @@ using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Communication
 {
-    public class RemoteRequest : IRemoteMessage
+    internal class RemoteRequest : IRemoteMessage
     {
         public RemoteRequest(string methodName, object[] args)
         {

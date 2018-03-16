@@ -1,6 +1,5 @@
 using Autofac;
 using RabbitMQ.Client;
-using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Contracts;
 using Sample.Infrastructure.Remoting.Serialization;
 
@@ -37,7 +36,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Communication
         public void Start()
         {
             _channel = _factory.Connect();
-            _channel.ExchangeDeclare(_exchange, "topic", true, autoDelete: false);
+            _channel.ExchangeDeclare(_exchange, "topic", true, false);
         }
     }
 }

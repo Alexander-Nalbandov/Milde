@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Sample.Infrastructure.Remoting.Communication;
+using Sample.Infrastructure.Remoting.Contracts;
 
 namespace Sample.Infrastructure.Remoting.Client
 {
-    public class RemoteProcedureExecutor<TInterface>
+    internal class RemoteProcedureExecutor<TInterface>
     {
         private readonly ResponseAwaitersRegistry<RemoteResponse> _awaitersRegistry;
         private readonly ISender<TInterface, RemoteRequest> _sender;

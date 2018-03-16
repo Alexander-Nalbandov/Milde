@@ -1,53 +1,42 @@
 using Autofac;
-using Sample.Infrastructure.Remoting.Client;
-using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Rabbit.Communication;
 using Sample.Infrastructure.Remoting.Rabbit.Configuration;
 using Sample.Infrastructure.Remoting.Registration;
-using Sample.Infrastructure.Remoting.Service;
 
 namespace Sample.Infrastructure.Remoting.Rabbit.Registration
 {
-    public class ServiceConfigurator : IServiceConfigurator
+    internal class ServiceConfigurator : BaseServiceConfigurator
     {
-        private readonly ContainerBuilder _builder;
-
-        internal ServiceConfigurator(ContainerBuilder builder)
+        internal ServiceConfigurator(ContainerBuilder builder) : base(builder)
         {
-            _builder = builder;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TInterface"></typeparam>
-        public void RegisterProxy<TInterface>()
+        protected override void RegisterRequestListener<TInterface, TMessage>()
         {
-            _builder.RegisterType<RabbitListener<TInterface, RemoteResponse>>()
-                .WithParameter("exchange", RabbitConfiguration.ResponseExchange)
-                .AsSelf().AsImplementedInterfaces().SingleInstance();
-            _builder.RegisterType<RabbitSender<TInterface, RemoteRequest>>()
+            _builder.RegisterType<RabbitListener<TInterface, TMessage>>()
                 .WithParameter("exchange", RabbitConfiguration.RequestExchange)
                 .AsSelf().AsImplementedInterfaces().SingleInstance();
-            _builder.RegisterType<RemoteProcedureExecutor<TInterface>>()
-                .AsSelf().SingleInstance();
-            _builder.Register(cc =>
-                    ServiceProxyFactory.Create<TInterface>(cc.Resolve<RemoteProcedureExecutor<TInterface>>(), cc.Resolve<ResponseConverter>()))
-                .AsImplementedInterfaces().SingleInstance();
         }
 
-        public void RegisterService<TImplementation, TInterface>() where TImplementation : TInterface
+        protected override void RegisterResponseListener<TInterface, TMessage>()
         {
-            _builder.RegisterType<RabbitListener<TInterface, RemoteRequest>>()
-                .WithParameter("exchange", RabbitConfiguration.RequestExchange)
-                .AsSelf().AsImplementedInterfaces().SingleInstance();
-            _builder.RegisterType<RabbitSender<TInterface, RemoteResponse>>()
+            _builder.RegisterType<RabbitListener<TInterface, TMessage>>()
                 .WithParameter("exchange", RabbitConfiguration.ResponseExchange)
                 .AsSelf().AsImplementedInterfaces().SingleInstance();
-            _builder.RegisterType<TImplementation>()
-                .AsSelf().SingleInstance(); //TODO should this be instance per owned lifetime scope?
-            _builder.RegisterType<MessageHandler<TImplementation, TInterface>>()
-                .AsImplementedInterfaces().SingleInstance();
+        }
+
+        protected override void RegisterRequestSender<TInterface, TMessage>()
+        {
+            _builder.RegisterType<RabbitSender<TInterface, TMessage>>()
+                .WithParameter("exchange", RabbitConfiguration.RequestExchange)
+                .AsSelf().AsImplementedInterfaces().SingleInstance();
+        }
+
+        protected override void RegisterResponseSender<TInterface, TMessage>()
+        {
+            _builder.RegisterType<RabbitSender<TInterface, TMessage>>()
+                .WithParameter("exchange", RabbitConfiguration.ResponseExchange)
+                .AsSelf().AsImplementedInterfaces().SingleInstance();
         }
     }
 }
