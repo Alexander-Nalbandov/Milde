@@ -1,24 +1,20 @@
 ﻿using System.Threading.Tasks;
 using Sample.UserManagement.Contract;
-using Sample.UserManagement.Domain;
-using Serilog;
+using Sample.UserManagement.Domain.Aggregates;
 
 namespace Sample.UserManagement.Handlers
 {
     public partial class UserManagementService : IUserManagementService
     {
-        private readonly ILogger _logger;
-
-        public UserManagementService(ILogger logger)
+        public async Task<UserDto> CreateUser(string firstName, string lastName, long age)
         {
-            _logger = logger;
-        }
+            var user = User.Create(firstName, lastName, (int)age);
 
-        public Task<UserDto> CreateUser(string name)
-        {
-            var user = User.Create(name);
-            _logger.Information("Created user: {@User}", user);
-            return Task.FromResult(user.ToDto());
+            await this._userRepository.Save(user);
+
+            this._logger.Information("Created user: {@User}", user);
+
+            return user.ToDto();
         }
     }
 }
