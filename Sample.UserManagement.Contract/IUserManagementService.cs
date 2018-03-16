@@ -5,7 +5,9 @@ namespace Sample.UserManagement.Contract
 {
     public interface IUserManagementService
     {
-        Task<UserDto> CreateUser(string name);
-        Task<UserDto> ChangeUserName(Guid aggregateId, string name);
+        Task<UserDto> CreateUser(string firstName, string lastName, long age);
+        Task<UserDto> ChangeUserFirstName(Guid aggregateId, string firstName);
+        Task<UserDto> ChangeUserLastName(Guid aggregateId, string lastName);
+        Task<UserDto> ChangeUserAge(Guid aggregateId, int age);
     }
 }

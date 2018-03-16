@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sample.Infrastructure\Sample.Infrastructure.EventSourcing.csproj" />
+    <ProjectReference Include="..\Sample.UserManagement.Contract\Sample.UserManagement.Contract.csproj" />
   </ItemGroup>
 
 </Project>

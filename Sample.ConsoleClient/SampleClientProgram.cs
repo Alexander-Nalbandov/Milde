@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using Autofac;
 using Microsoft.Extensions.Configuration;
+using Sample.Infrastructure.AggregateCache;
+using Sample.Infrastructure.EventSourcing;
+using Sample.Infrastructure.EventStore;
+using Sample.Infrastructure.EventStore.Configuration;
+using Sample.Infrastructure.Redis;
 using Sample.Infrastructure.Remoting.Rabbit.Registration;
 using Sample.UserManagement.Contract;
 using Sample.UserManagement.Handlers;
@@ -18,8 +23,16 @@ namespace Sample.ConsoleClient
             var service = container.Resolve<IUserManagementService>();
             while (true)
             {
-                var name = Console.ReadLine();
-                var a = service.CreateUser(name).Result;
+                Console.WriteLine("First Name:");
+                var firstName = Console.ReadLine();
+
+                Console.WriteLine("Last Name:");
+                var lastName = Console.ReadLine();
+
+                Console.WriteLine("Age:");
+                var age = int.Parse(Console.ReadLine());
+
+                var a = service.CreateUser(firstName, lastName, age).Result;
                 Console.WriteLine($"Created {a}");
             }
         }
@@ -37,9 +50,6 @@ namespace Sample.ConsoleClient
                 }
             );
 
-            var logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
-            builder.RegisterInstance(logger).AsImplementedInterfaces().SingleInstance();
-
             return builder.Build();
         }
 
@@ -51,7 +61,7 @@ namespace Sample.ConsoleClient
                 {"rabbit:address", "amqp://localhost:5672"},
                 {"rabbit:username", "username"},
                 {"rabbit:password", "password"},
-                {"rabbit:vhost", "/"},
+                {"rabbit:vhost", "/"}
             });
             return configBuilder.Build();
         }
