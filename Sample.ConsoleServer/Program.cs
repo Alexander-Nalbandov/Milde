@@ -25,8 +25,8 @@ namespace Sample.ConsoleServer
                            configBuilder.AddInMemoryCollection(new Dictionary<string, string>
                            {
                                {"rabbit:address", "amqp://localhost:5672"},
-                               {"rabbit:username", "server"},
-                               {"rabbit:password", "password"},
+                               {"rabbit:username", "guest"},
+                               {"rabbit:password", "guest"},
                                {"rabbit:vhost", "/"},
                                {"Redis:ConnectionString", "localhost:6379"},
                                {"EventStore:Host", "127.0.0.1"},
