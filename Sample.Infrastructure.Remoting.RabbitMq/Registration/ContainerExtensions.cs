@@ -1,5 +1,6 @@
 using System;
 using Autofac;
+using Sample.Infrastructure.Hosting.Host;
 using Sample.Infrastructure.Remoting.Registration;
 
 namespace Sample.Infrastructure.Remoting.Rabbit.Registration
@@ -14,6 +15,14 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Registration
             action(configurator);
 
             return builder;
+        }
+
+        public static IHostBuilder WithRabbitRemoting(
+            this IHostBuilder hostBuilder,
+            Action<IServiceConfigurator> action
+        )
+        {
+            return hostBuilder.With(builder => builder.WithRabbitRemoting(action));
         }
     }
 }

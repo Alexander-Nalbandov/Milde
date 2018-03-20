@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sample.Infrastructure.AggregateCache\Sample.Infrastructure.AggregateCache.csproj" />
+    <ProjectReference Include="..\Sample.Infrastructure.EventStore\Sample.Infrastructure.EventStore.csproj" />
+    <ProjectReference Include="..\Sample.Infrastructure.Remoting.RabbitMq\Sample.Infrastructure.Remoting.Rabbit.csproj" />
     <ProjectReference Include="..\Sample.UserManagement.Contract\Sample.UserManagement.Contract.csproj" />
     <ProjectReference Include="..\Sample.UserManagement.Domain\Sample.UserManagement.Domain.csproj" />
   </ItemGroup>

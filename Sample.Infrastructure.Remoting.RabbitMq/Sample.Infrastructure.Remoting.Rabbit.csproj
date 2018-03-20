@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sample.Infrastructure.Hosting\Sample.Infrastructure.Hosting.csproj" />
     <ProjectReference Include="..\Sample.Infrastructure.Remoting\Sample.Infrastructure.Remoting.csproj" />
   </ItemGroup>
 
