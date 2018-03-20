@@ -1,7 +1,6 @@
 ﻿using System;
 using AutoMapper;
 using Sample.UserManagement.Contract;
-using Sample.UserManagement.Domain;
 using Sample.UserManagement.Domain.Aggregates;
 
 namespace Sample.ConsoleClient

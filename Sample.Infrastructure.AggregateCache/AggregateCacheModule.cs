@@ -1,19 +1,22 @@
 ﻿using Autofac;
 using Sample.Infrastructure.AggregateCache.InMemory;
-using Sample.Infrastructure.EventSourcing.Cache;
+using Sample.Infrastructure.EventSourcing.Hosting;
 using Sample.Infrastructure.Redis;
 
 namespace Sample.Infrastructure.AggregateCache
 {
     public static class AggregateCacheModule
     {
-        public static ContainerBuilder UseAggregateCache(this ContainerBuilder builder)
+        public static IEventSourcingConfiguration WithComplexAggregateCache(this IEventSourcingConfiguration configuration)
         {
-            builder.UseRedisAggregateCache();
-            builder.RegisterGeneric(typeof(InMemoryAggregateCache<>)).As(typeof(IInMemoryAggregateCache<>)).SingleInstance();
-            builder.RegisterGeneric(typeof(AggregateCache<>)).As(typeof(IAggregateCache<>)).SingleInstance();
-
-            return builder;
+            return configuration.WithRedisAggregateCache()
+                                .WithAggregateCache(typeof(AggregateCache<>), builder =>
+                                {
+                                    builder
+                                        .RegisterGeneric(typeof(InMemoryAggregateCache<>))
+                                        .As(typeof(IInMemoryAggregateCache<>))
+                                        .SingleInstance();
+                                });
         }
     }
 }

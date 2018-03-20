@@ -2,15 +2,8 @@
 using System.Collections.Generic;
 using Autofac;
 using Microsoft.Extensions.Configuration;
-using Sample.Infrastructure.AggregateCache;
-using Sample.Infrastructure.EventSourcing;
-using Sample.Infrastructure.EventStore;
-using Sample.Infrastructure.EventStore.Configuration;
-using Sample.Infrastructure.Redis;
 using Sample.Infrastructure.Remoting.Rabbit.Registration;
 using Sample.UserManagement.Contract;
-using Sample.UserManagement.Handlers;
-using Serilog;
 
 namespace Sample.ConsoleClient
 {
