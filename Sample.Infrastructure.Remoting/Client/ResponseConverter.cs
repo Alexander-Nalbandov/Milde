@@ -35,7 +35,7 @@ namespace Sample.Infrastructure.Remoting.Client
 
         private Task<T> FromException<T>(Exception ex)
         {
-            return Task.FromException<T>(ex);
+            return Task.FromException<T>(new TargetInvocationException(ex));
         }
     }
 }
