@@ -9,5 +9,6 @@ namespace Sample.UserManagement.Contract
         Task<UserDto> ChangeUserFirstName(Guid aggregateId, string firstName);
         Task<UserDto> ChangeUserLastName(Guid aggregateId, string lastName);
         Task<UserDto> ChangeUserAge(Guid aggregateId, int age);
+        Task<UserDto> ThrowException(Guid aggregateId);
     }
 }

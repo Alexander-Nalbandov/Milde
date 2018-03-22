@@ -27,6 +27,7 @@ namespace Sample.ConsoleClient
 
                 var a = service.CreateUser(firstName, lastName, age).Result;
                 Console.WriteLine($"Created {a}");
+                service.ThrowException(a.Id);
             }
         }
 

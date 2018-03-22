@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Sample.Infrastructure.Remoting.Communication;
 
 namespace Sample.Infrastructure.Remoting.Client
@@ -37,9 +38,13 @@ namespace Sample.Infrastructure.Remoting.Client
             if (!method.ReturnType.IsGenericType)
                 throw new InvalidOperationException("ServiceProxy doesn't support VOID methods.");
 
-            var request = new RemoteRequest(method.Name, args);
+            var request = new RemoteRequest(method.Name, args.Select(JsonConvert.SerializeObject).ToArray());
             var routingKey = GetRoutingKey(method.Name);
             var response = _executor.Execute(request, routingKey).Result;
+
+            if (response.IsFaulted)
+                throw response.Exception;
+
             var convertedResponse =
                 _converter.Convert(response.Response, method.ReturnType.GetGenericArguments().First());
             return convertedResponse;
