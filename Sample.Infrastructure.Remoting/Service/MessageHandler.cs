@@ -30,12 +30,12 @@ namespace Sample.Infrastructure.Remoting.Service
 
         public void Start()
         {
-            _logger.Information("Service {ServiceName} has started", typeof(TInterface).Name);
+            _logger.Information("Service {ServiceName} has started", typeof(TImplementation).Name);
         }
 
         private bool HandleRequest(RemoteRequest request)
         {
-            _logger.Debug("{ServiceName}: Handling {RequestName}", typeof(TInterface).Name, request.MethodName);
+            _logger.Debug("{ServiceName}: Handling {RequestName}", typeof(TImplementation).Name, request.MethodName);
             try
             {
                 var response = this.GetResponse(request.MethodName, request.Args);
