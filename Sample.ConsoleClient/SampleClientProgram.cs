@@ -9,7 +9,7 @@ namespace Sample.ConsoleClient
 {
     internal class SampleClientProgram
     {
-        public void Run()
+        public async void Run()
         {
             var cfg = BuildConfiguration();
             var container = ConfigureContainer(cfg);
@@ -25,9 +25,9 @@ namespace Sample.ConsoleClient
                 Console.WriteLine("Age:");
                 var age = int.Parse(Console.ReadLine());
 
-                var a = service.CreateUser(firstName, lastName, age).Result;
+                var a = await service.CreateUser(firstName, lastName, age);
                 Console.WriteLine($"Created {a}");
-                service.ThrowException(a.Id);
+                var b = await service.ThrowException(a.Id);
             }
         }
 

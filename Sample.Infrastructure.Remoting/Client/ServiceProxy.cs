@@ -42,11 +42,8 @@ namespace Sample.Infrastructure.Remoting.Client
             var routingKey = GetRoutingKey(method.Name);
             var response = _executor.Execute(request, routingKey).Result;
 
-            if (response.IsFaulted)
-                throw response.Exception;
-
             var convertedResponse =
-                _converter.Convert(response.Response, method.ReturnType.GetGenericArguments().First());
+                _converter.Convert(response, method.ReturnType.GetGenericArguments().First());
             return convertedResponse;
         }
 
