@@ -1,21 +1,35 @@
 version: '3'
 
 services:
-  sample-rabbit:
+  rabbit:
+    #container_name: sample-rabbit
+    hostname: sample-rabbit
     image: rabbitmq:management
     ports:
       - "15672:15672"
       - "5672:5672"
-  sample-redis:
+  redis:
+    #container_name: sample-redis
+    hostname: sample-redis
     image: redis
     ports:
       - "6379:6379"
-  sample-es:
+  es:
+    #container_name: sample-es
+    hostname: sample-es
     image: eventstore/eventstore
     ports:
       - "2113:2113"
       - "1113:1113"
-  sample-redis-ui:
-    image: dmportella/redis-commander:latest
-    ports: 
-      - "8080:8080"
+  redis-ui:
+    #container_name: sample-redis-ui
+    hostname: sample-redis-ui
+    image: rediscommander/redis-commander:latest
+    depends_on:
+      - redis
+    build: .
+    restart: always
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
