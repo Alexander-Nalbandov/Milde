@@ -24,6 +24,15 @@ namespace Sample.Infrastructure.EventSourcing.Aggregates
         }
 
 
+        // TODO: Remove it and make proper deserialization
+        protected Aggregate(Guid id, int version, int shardKey)
+        {
+            Id = id;
+            Version = version;
+            ShardKey = shardKey;
+        }
+
+
         public Guid Id { get; private set; }
 
         public int Version { get; private set; }

@@ -23,10 +23,7 @@ namespace Sample.Infrastructure.EventSourcing.Serialization
                 return null;
             }
 
-            return JsonConvert.DeserializeObject<T>(data, new JsonSerializerSettings
-            {
-                ContractResolver = new PrivateSetterContractResolver()
-            });
+            return JsonConvert.DeserializeObject<T>(data);
         }
 
         public object Deserialize(Type dataType, string data)
@@ -36,10 +33,7 @@ namespace Sample.Infrastructure.EventSourcing.Serialization
                 return null;
             }
 
-            return JsonConvert.DeserializeObject(data, dataType, new JsonSerializerSettings
-            {
-                ContractResolver = new PrivateSetterContractResolver()
-            });
+            return JsonConvert.DeserializeObject(data, dataType);
         }
 
         public string DeserializeFromBytes(byte[] data)

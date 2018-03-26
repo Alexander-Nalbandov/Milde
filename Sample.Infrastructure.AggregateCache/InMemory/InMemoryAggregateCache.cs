@@ -58,7 +58,16 @@ namespace Sample.Infrastructure.AggregateCache.InMemory
 
         public Task SaveAggregate(TAggregate aggregate)
         {
-            this._aggregates[aggregate.Id] = aggregate;
+            return this.SaveAggregates(new[] {aggregate});
+        }
+
+        public Task SaveAggregates(IList<TAggregate> aggregates)
+        {
+            foreach (var aggregate in aggregates)
+            {
+                this._aggregates[aggregate.Id] = aggregate;
+            }
+
             return Task.CompletedTask;
         }
     }

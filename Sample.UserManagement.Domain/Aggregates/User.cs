@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Sample.Infrastructure.EventSourcing.Aggregates;
 using Sample.UserManagement.Contract.Events;
 
@@ -9,6 +10,17 @@ namespace Sample.UserManagement.Domain.Aggregates
         public User(Guid id) : base(id)
         {
         }
+
+        // TODO: Remove and make proper deserialization
+        [JsonConstructor]
+        public User(Guid id, int version, int shardKey, string firstName, string lastName, int age)
+            : base(id, version, shardKey)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+        }
+        
 
         public string FirstName { get; private set; }
         public string LastName { get; private set; }

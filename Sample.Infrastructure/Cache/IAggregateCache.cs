@@ -14,5 +14,6 @@ namespace Sample.Infrastructure.EventSourcing.Cache
         Task<IList<TAggregate>> GetAllAggregates();
         Task<TAggregate> GetAggregate(Guid id);
         Task SaveAggregate(TAggregate aggregate);
+        Task SaveAggregates(IList<TAggregate> aggregates);
     }
 }
