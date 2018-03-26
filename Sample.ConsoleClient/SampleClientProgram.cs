@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Autofac;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Sample.Infrastructure.Remoting.Rabbit.Registration;
 using Sample.UserManagement.Contract;
 
@@ -16,18 +19,22 @@ namespace Sample.ConsoleClient
             var service = container.Resolve<IUserManagementService>();
             while (true)
             {
-                Console.WriteLine("First Name:");
-                var firstName = Console.ReadLine();
-
-                Console.WriteLine("Last Name:");
-                var lastName = Console.ReadLine();
-
-                Console.WriteLine("Age:");
-                var age = int.Parse(Console.ReadLine());
-
-                var a = await service.CreateUser(firstName, lastName, age);
-                Console.WriteLine($"Created {a}");
-                var b = await service.ThrowException(a.Id);
+                var command = Console.ReadLine();
+                switch (command)
+                {
+                    case "list":
+                        await this.ListCommand(service);
+                        break;
+                    case "create":
+                        await this.CreateCommand(service);
+                        break;
+                    case "throw":
+                        await service.ThrowException(Guid.Empty);
+                        break;
+                    default:
+                        Console.WriteLine("Unknown command");
+                        break;
+                }
             }
         }
 
@@ -58,6 +65,37 @@ namespace Sample.ConsoleClient
                 {"rabbit:vhost", "/"}
             });
             return configBuilder.Build();
+        }
+
+
+        private async Task ListCommand(IUserManagementService service)
+        {
+            var users = await service.Get();
+            if (!users.Any())
+            {
+                Console.WriteLine("There are no users.");
+                return;
+            }
+
+            foreach (var user in users)
+            {
+                Console.WriteLine(JsonConvert.SerializeObject(user));
+            }
+        }
+
+        private async Task CreateCommand(IUserManagementService service)
+        {
+            Console.WriteLine("First Name:");
+            var firstName = Console.ReadLine();
+
+            Console.WriteLine("Last Name:");
+            var lastName = Console.ReadLine();
+
+            Console.WriteLine("Age:");
+            var age = int.Parse(Console.ReadLine());
+
+            var a = await service.CreateUser(firstName, lastName, age);
+            Console.WriteLine($"Created {JsonConvert.SerializeObject(a)}");
         }
     }
 }
