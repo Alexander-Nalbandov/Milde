@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sample.Infrastructure.Remoting\Sample.Infrastructure.Remoting.csproj" />
+    <ProjectReference Include="..\..\src\Sample.Infrastructure.Remoting\Sample.Infrastructure.Remoting.csproj" />
   </ItemGroup>
 
 </Project>

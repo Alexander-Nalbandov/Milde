@@ -3,41 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ConsoleServer", "Sample.ConsoleServer\Sample.ConsoleServer.csproj", "{524A042A-777D-4B8C-9A50-73FCDF67BEE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ConsoleServer", "samples\Sample.ConsoleServer\Sample.ConsoleServer.csproj", "{524A042A-777D-4B8C-9A50-73FCDF67BEE0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.WebClient", "Sample.Client\Sample.WebClient.csproj", "{2E59FCBA-4518-40B6-AE2B-19089355EA88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.WebClient", "samples\Sample.Client\Sample.WebClient.csproj", "{2E59FCBA-4518-40B6-AE2B-19089355EA88}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.EventSourcing", "Sample.Infrastructure\Sample.Infrastructure.EventSourcing.csproj", "{65E1AC0C-908A-4994-8FCE-1FA384562EB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.EventSourcing", "src\Sample.Infrastructure\Sample.Infrastructure.EventSourcing.csproj", "{65E1AC0C-908A-4994-8FCE-1FA384562EB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement", "Sample.UserManagement\Sample.UserManagement.csproj", "{4534D5E9-3237-4F98-85F0-8000854B7F91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement", "samples\Sample.UserManagement\Sample.UserManagement.csproj", "{4534D5E9-3237-4F98-85F0-8000854B7F91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement.Contract", "Sample.UserManagement.Contract\Sample.UserManagement.Contract.csproj", "{8A7B08F5-891B-4B85-B4A5-6114316B0085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement.Contract", "samples\Sample.UserManagement.Contract\Sample.UserManagement.Contract.csproj", "{8A7B08F5-891B-4B85-B4A5-6114316B0085}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserManagement", "UserManagement", "{CCCC9953-CEE6-47DD-8656-713C86811A12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement.Domain", "Sample.UserManagement.Domain\Sample.UserManagement.Domain.csproj", "{1BC17BC9-EB72-4CD9-9D47-D08A24454F78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.UserManagement.Domain", "samples\Sample.UserManagement.Domain\Sample.UserManagement.Domain.csproj", "{1BC17BC9-EB72-4CD9-9D47-D08A24454F78}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting", "Sample.Infrastructure.Remoting\Sample.Infrastructure.Remoting.csproj", "{BB2F880F-509E-4BCA-A91D-988E4B5AE767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting", "src\Sample.Infrastructure.Remoting\Sample.Infrastructure.Remoting.csproj", "{BB2F880F-509E-4BCA-A91D-988E4B5AE767}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting.Rabbit", "Sample.Infrastructure.Remoting.RabbitMq\Sample.Infrastructure.Remoting.Rabbit.csproj", "{78BA3748-E9F4-443B-A9AC-71C8E1C69323}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting.Rabbit", "src\Sample.Infrastructure.Remoting.RabbitMq\Sample.Infrastructure.Remoting.Rabbit.csproj", "{78BA3748-E9F4-443B-A9AC-71C8E1C69323}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{640E6D1A-9F7D-4282-9531-54626421CEA4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ConsoleClient", "Sample.ConsoleClient\Sample.ConsoleClient.csproj", "{1E680DB6-52B7-4F1D-B964-909C2BD2E6EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ConsoleClient", "samples\Sample.ConsoleClient\Sample.ConsoleClient.csproj", "{1E680DB6-52B7-4F1D-B964-909C2BD2E6EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.WebApplication", "Sample.WebApplication\Sample.WebApplication.csproj", "{5DAC511C-F40B-4B13-82E2-B2A3243093A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.WebApplication", "samples\Sample.WebApplication\Sample.WebApplication.csproj", "{5DAC511C-F40B-4B13-82E2-B2A3243093A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.AggregateCache", "Sample.Infrastructure.AggregateCache\Sample.Infrastructure.AggregateCache.csproj", "{CBC96507-854F-437C-8A39-4003A4FE6F58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.AggregateCache", "src\Sample.Infrastructure.AggregateCache\Sample.Infrastructure.AggregateCache.csproj", "{CBC96507-854F-437C-8A39-4003A4FE6F58}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.EventStore", "Sample.Infrastructure.EventStore\Sample.Infrastructure.EventStore.csproj", "{18983C20-FCCF-47B4-A383-7F164B79E578}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.EventStore", "src\Sample.Infrastructure.EventStore\Sample.Infrastructure.EventStore.csproj", "{18983C20-FCCF-47B4-A383-7F164B79E578}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Redis", "Sample.Infrastructure.Redis\Sample.Infrastructure.Redis.csproj", "{E5D294ED-EEDA-483A-BE2C-5D7C4C476219}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Redis", "src\Sample.Infrastructure.Redis\Sample.Infrastructure.Redis.csproj", "{E5D294ED-EEDA-483A-BE2C-5D7C4C476219}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting.Tests", "Sample.Infrastructure.Remoting.Tests\Sample.Infrastructure.Remoting.Tests.csproj", "{0AC4FE8A-C387-45DD-BC19-6D28341B634C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Remoting.Tests", "tests\Sample.Infrastructure.Remoting.Tests\Sample.Infrastructure.Remoting.Tests.csproj", "{0AC4FE8A-C387-45DD-BC19-6D28341B634C}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FB309D91-827C-4D71-B84E-F4F1E583C7C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Hosting", "Sample.Infrastructure.Hosting\Sample.Infrastructure.Hosting.csproj", "{6A8058FB-3893-4C2E-8C67-DF4E4A32D260}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Infrastructure.Hosting", "src\Sample.Infrastructure.Hosting\Sample.Infrastructure.Hosting.csproj", "{6A8058FB-3893-4C2E-8C67-DF4E4A32D260}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
