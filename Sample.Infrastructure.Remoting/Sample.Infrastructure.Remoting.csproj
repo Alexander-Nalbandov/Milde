@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Alexander Nalbandov, Denis Somok</Authors>
+    <Company>The Gang</Company>
+    <PackageProjectUrl>https://github.com/Alexander-Nalbandov/Sample</PackageProjectUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Alexander-Nalbandov/Sample</RepositoryUrl>
+    <Description>This package contains async RPC API to communicate between components over chosen transport.</Description>
+    <Copyright>The Gang</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
