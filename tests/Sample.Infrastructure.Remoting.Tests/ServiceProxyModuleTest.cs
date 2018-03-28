@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Sample.Infrastructure.Remoting.Client;
@@ -45,12 +47,29 @@ namespace Sample.Infrastructure.Remoting.Tests
             Assert.Throws<InvalidOperationException>(() => proxy.SyncMethod());
         }
 
-        [Fact(Skip = "For now")]
+        [Fact]
         public async void TestFaultedInvocation()
         {
-            var proxy = RegisterProxy<ITestInterface>(() => throw new ArgumentNullException("sadas"));
+            const string errorMsg = "someerror";
+            var proxy = RegisterProxy<ITestInterface>(() => new ArgumentNullException(errorMsg));
 
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await proxy.AsyncObjectMethod());
+            var targetInvocationEx = await Assert.ThrowsAsync<TargetInvocationException>(async () => await proxy.AsyncObjectMethod());
+
+            var sourceEx = targetInvocationEx.InnerException.ShouldBeAssignableTo<ArgumentNullException>();
+            sourceEx.Message.ShouldBe(errorMsg);
+        }
+
+        [Fact]
+        public void TestFaultedBlockingInvocation()
+        {
+            const string errorMsg = "someerror";
+            var proxy = RegisterProxy<ITestInterface>(() => new ArgumentNullException(errorMsg));
+
+            var ex = Assert.Throws<AggregateException>(() => proxy.AsyncObjectMethod().Wait());
+
+            var targetInvocationEx = ex.InnerExceptions.First().ShouldBeAssignableTo<TargetInvocationException>();
+            var sourceEx = targetInvocationEx.InnerException.ShouldBeAssignableTo<ArgumentNullException>();
+            sourceEx.Message.ShouldBe(errorMsg);
         }
 
         [Fact]
@@ -59,7 +78,7 @@ namespace Sample.Infrastructure.Remoting.Tests
             true.ShouldBe(true);
         }
 
-        private TInterface RegisterProxy<TInterface>(Func<object> processAction)
+        private TInterface RegisterProxy<TInterface>(Func<dynamic> processAction)
         {
             var builder = new ContainerBuilder();
             builder.RegisterMockTransport<TInterface>(e => new RemoteResponse(processAction()));

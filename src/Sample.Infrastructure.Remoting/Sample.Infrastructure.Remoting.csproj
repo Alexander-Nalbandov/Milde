@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/Alexander-Nalbandov/Sample</RepositoryUrl>
     <Description>This package contains async RPC API to communicate between components over chosen transport.</Description>
     <Copyright>The Gang</Copyright>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

@@ -18,13 +18,21 @@ namespace Sample.Infrastructure.Remoting.Client
 
         public dynamic Convert(RemoteResponse response, Type targetType)
         {
-            if (response.IsFaulted)
+            try
             {
-                return _fromExceptionMethod.MakeGenericMethod(targetType).Invoke(this, new[] { response.Exception });
+                if (response.IsFaulted)
+                {
+                    return _fromExceptionMethod.MakeGenericMethod(targetType).Invoke(this, new[] {response.Exception});
+                }
+                else
+                {
+                    return _fromResultMethod.MakeGenericMethod(targetType).Invoke(this, new[] {response.Response});
+                }
+
             }
-            else
+            catch (TargetInvocationException ex)
             {
-                return _fromResultMethod.MakeGenericMethod(targetType).Invoke(this, new[] { response.Response });
+                throw ex.GetBaseException();
             }
         }
 
@@ -33,6 +41,13 @@ namespace Sample.Infrastructure.Remoting.Client
             return Task.FromResult((T) o);
         }
 
+        /// <summary>
+        /// Source exception is wrapped into TargetInvocationExcpetion in order to preserve remote stask trace
+        /// Otherwise Source exception is unwrapped on await statement and the stack trace will be replaced  
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ex"></param>
+        /// <returns></returns>
         private Task<T> FromException<T>(Exception ex)
         {
             return Task.FromException<T>(new TargetInvocationException(ex));
