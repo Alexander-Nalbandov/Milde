@@ -1,7 +1,10 @@
 ﻿using System.Net;
+using System.Reflection;
 using Autofac;
 using EventStore.ClientAPI;
+using Sample.Infrastructure.EventSourcing.EventBus;
 using Sample.Infrastructure.EventSourcing.Hosting;
+using Sample.Infrastructure.EventSourcing.Serialization;
 using Sample.Infrastructure.EventStore.Configuration;
 using Sample.Infrastructure.Hosting.Host;
 
@@ -9,7 +12,7 @@ namespace Sample.Infrastructure.EventStore
 {
     public static class EventStoreModule
     {
-        public static IHostBuilder WithEventStoreEventBus(this IHostBuilder hostBuilder)
+        public static IHostBuilder WithEventStoreEventBus(this IHostBuilder hostBuilder, params Assembly[] handlersAssemblies)
         {
             return hostBuilder.With((builder, config) =>
             {
@@ -17,6 +20,11 @@ namespace Sample.Infrastructure.EventStore
 
                 builder.WithEventStoreDatabase(eventStoreConfig);
                 builder.RegisterType<EventBus.EventBus>().AsImplementedInterfaces().SingleInstance();
+                builder.RegisterType<EventConverter>().AsSelf().SingleInstance();
+
+                builder.RegisterType<Serializer>().AsImplementedInterfaces().SingleInstance();
+
+                builder.RegisterEventHandlers(handlersAssemblies);
             });
         }
 
