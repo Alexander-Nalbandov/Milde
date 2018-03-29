@@ -10,5 +10,6 @@ namespace Sample.Infrastructure.Remoting.Tests
         void VoidMethod();
         DateTime SyncMethod();
         Task<object> AsyncObjectMethod();
+        Task<object> AsyncObjectMethodWithParameters(DateTime date, bool flag, object @class, Type type);
     }
 }
