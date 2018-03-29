@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Sample.Infrastructure.Remoting.Contracts;
 
-namespace Sample.Infrastructure.Remoting.Communication
+namespace Sample.Infrastructure.Remoting.Client
 {
     internal class ResponseAwaiter<TResponse>
         where TResponse : IRemoteMessage

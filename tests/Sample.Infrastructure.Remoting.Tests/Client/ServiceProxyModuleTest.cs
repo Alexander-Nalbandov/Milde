@@ -1,26 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Autofac;
 using Sample.Infrastructure.Remoting.Client;
 using Sample.Infrastructure.Remoting.Communication;
 using Shouldly;
 using Xunit;
 
-namespace Sample.Infrastructure.Remoting.Tests
+namespace Sample.Infrastructure.Remoting.Tests.Client
 {
-    public class ServiceProxyModuleTest
+    public partial class ServiceProxyModuleTest
     {
-        internal interface ITestInterface
-        {
-            Task<bool> AsyncBooleanMethod(string input);
-            Task AsyncVoidMethod();
-            void VoidMethod();
-            DateTime SyncMethod();
-            Task<object> AsyncObjectMethod();
-        }
-
         [Fact]
         public async void TestCorrectBooleanInvocation()
         {

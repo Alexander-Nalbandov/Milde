@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using Sample.Infrastructure.Remoting.Contracts;
 
-namespace Sample.Infrastructure.Remoting.Communication
+namespace Sample.Infrastructure.Remoting.Client
 {
     internal class ResponseAwaitersRegistry<TResponse>
         where TResponse : IRemoteMessage

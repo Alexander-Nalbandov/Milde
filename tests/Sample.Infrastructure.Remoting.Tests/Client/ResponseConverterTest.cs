@@ -8,7 +8,7 @@ using Sample.Infrastructure.Remoting.Communication;
 using Shouldly;
 using Xunit;
 
-namespace Sample.Infrastructure.Remoting.Tests
+namespace Sample.Infrastructure.Remoting.Tests.Client
 {
     public class ResponseConverterTest
     {

@@ -3,6 +3,7 @@ using Autofac;
 using Moq;
 using Sample.Infrastructure.Remoting.Communication;
 using Sample.Infrastructure.Remoting.Contracts;
+using Sample.Infrastructure.Remoting.Tests.Client;
 
 namespace Sample.Infrastructure.Remoting.Tests
 {
@@ -13,8 +14,8 @@ namespace Sample.Infrastructure.Remoting.Tests
         {
             Func<RemoteResponse, bool> handlerClosure = null;
 
-            var sender = new Mock<ISender<ServiceProxyModuleTest.ITestInterface, RemoteRequest>>();
-            var listener = new Mock<IListener<ServiceProxyModuleTest.ITestInterface, RemoteResponse>>();
+            var sender = new Mock<ISender<ITestInterface, RemoteRequest>>();
+            var listener = new Mock<IListener<ITestInterface, RemoteResponse>>();
 
             sender.Setup(s => s.Send(It.IsAny<RemoteRequest>()))
                 .Callback<RemoteRequest>(req =>
