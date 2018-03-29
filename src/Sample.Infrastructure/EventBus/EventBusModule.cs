@@ -1,12 +1,21 @@
 ﻿using System.Linq;
+using System.Reflection;
 using Autofac;
 
 namespace Sample.Infrastructure.EventSourcing.EventBus
 {
     public static class EventBusModule
     {
-        public static ContainerBuilder RegisterEventHandlers(this ContainerBuilder builder)
+        public static ContainerBuilder RegisterEventHandlers(this ContainerBuilder builder, params Assembly[] assemblies)
         {
+            builder.RegisterAssemblyTypes(assemblies).Where(type =>
+            {
+                return type.GetInterfaces().Any(i =>
+                    i.IsGenericType &&
+                    i.GetGenericTypeDefinition() == typeof(IEventHandler<>)
+                );
+            }).AsImplementedInterfaces().AsSelf().SingleInstance();
+
             builder.RegisterBuildCallback(container =>
             {
                 var eventBus = container.Resolve<IEventBus>();
