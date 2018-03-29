@@ -56,7 +56,7 @@ namespace Sample.Infrastructure.Remoting.Tests
             var targetInvocationEx = await Assert.ThrowsAsync<TargetInvocationException>(async () => await proxy.AsyncObjectMethod());
 
             var sourceEx = targetInvocationEx.InnerException.ShouldBeAssignableTo<ArgumentNullException>();
-            sourceEx.Message.ShouldBe(errorMsg);
+            sourceEx.ParamName.ShouldBe(errorMsg);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace Sample.Infrastructure.Remoting.Tests
 
             var targetInvocationEx = ex.InnerExceptions.First().ShouldBeAssignableTo<TargetInvocationException>();
             var sourceEx = targetInvocationEx.InnerException.ShouldBeAssignableTo<ArgumentNullException>();
-            sourceEx.Message.ShouldBe(errorMsg);
+            sourceEx.ParamName.ShouldBe(errorMsg);
         }
 
         [Fact]
