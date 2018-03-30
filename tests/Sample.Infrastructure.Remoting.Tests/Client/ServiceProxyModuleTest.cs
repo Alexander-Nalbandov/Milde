@@ -16,7 +16,7 @@ namespace Sample.Infrastructure.Remoting.Tests.Client
         {
             var proxy = RegisterProxy<ITestInterface>(() => true);
 
-            var result = await proxy.AsyncBooleanMethod("adf");
+            var result = await proxy.AsyncBooleanMethod(true);
 
             result.ShouldBe(true);
         }

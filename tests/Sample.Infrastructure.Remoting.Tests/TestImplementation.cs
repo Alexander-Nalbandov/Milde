@@ -5,7 +5,7 @@ namespace Sample.Infrastructure.Remoting.Tests
 {
     internal class TestImplementation : ITestInterface
     {
-        public Task<bool> AsyncBooleanMethod(string input)
+        public Task<bool> AsyncBooleanMethod(bool input)
         {
             return Task.FromResult(true);
         }
@@ -33,6 +33,11 @@ namespace Sample.Infrastructure.Remoting.Tests
         public Task<object> AsyncObjectMethodWithParameters(DateTime date, bool flag, object @class, Type type)
         {
             return Task.FromResult(new object());
+        }
+
+        public Task<int> NotImplementedMethod()
+        {
+            throw new NotImplementedException();
         }
     }
 }
