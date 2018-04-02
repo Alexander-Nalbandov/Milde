@@ -4,6 +4,7 @@ namespace Sample.Infrastructure.Remoting.Rabbit.Configuration
 {
     internal class RabbitConfiguration
     {
+        //TODO: Get the connection settings from the configuration action instead of directly querying IConfiguration
         public RabbitConfiguration(IConfiguration config)
         {
             var rabbitConfig = config.GetSection("rabbit");
