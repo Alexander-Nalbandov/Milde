@@ -1,5 +1,5 @@
 ﻿using System;
-using Sample.Infrastructure.EventSourcing.Events;
+using Milde.EventSourcing.Events;
 
 namespace Sample.UserManagement.Contract.Events
 {

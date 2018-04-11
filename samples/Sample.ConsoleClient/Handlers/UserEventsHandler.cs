@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Sample.Infrastructure.EventSourcing.EventBus;
-using Sample.Infrastructure.EventSourcing.Events;
+using Milde.EventSourcing.EventBus;
+using Milde.EventSourcing.Events;
 using Sample.UserManagement.Contract.Events;
 using Serilog;
 

@@ -1,4 +1,4 @@
-﻿using Sample.Infrastructure.EventSourcing.Aggregates;
+﻿using Milde.EventSourcing.Aggregates;
 
 namespace Sample.UserManagement.Domain.Repositories
 {

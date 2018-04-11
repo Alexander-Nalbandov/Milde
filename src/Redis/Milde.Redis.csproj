@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Denis Somok</Authors>
+    <Company>The Gang</Company>
+    <PackageProjectUrl>https://github.com/Alexander-Nalbandov/Milde</PackageProjectUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Alexander-Nalbandov/Milde</RepositoryUrl>
+    <Description>This package contains Redis cache for Milde.EventSourcing.</Description>
+    <Copyright>The Gang</Copyright>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="StackExchange.Redis" Version="1.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventSourcing\Milde.EventSourcing.csproj" />
+  </ItemGroup>
+
+</Project>

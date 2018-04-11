@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Denis Somok</Authors>
+    <Company>The Gang</Company>
+    <PackageProjectUrl>https://github.com/Alexander-Nalbandov/Milde</PackageProjectUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Alexander-Nalbandov/Milde</RepositoryUrl>
+    <Description>This package contains ES abstractios for aggregates, event bus and event store</Description>
+    <Copyright>The Gang</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hosting\Milde.Hosting.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Denis Somok</Authors>
+    <Company>The Gang</Company>
+    <PackageProjectUrl>https://github.com/Alexander-Nalbandov/Milde</PackageProjectUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Alexander-Nalbandov/Milde</RepositoryUrl>
+    <Description>This package contains combined inmemory and Redis persistence layer for ES aggregate state</Description>
+    <Copyright>The Gang</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Redis\Milde.Redis.csproj" />
+    <ProjectReference Include="..\EventSourcing\Milde.EventSourcing.csproj" />
+  </ItemGroup>
+
+</Project>

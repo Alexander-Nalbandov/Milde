@@ -1,6 +1,6 @@
 ﻿using System;
+using Milde.EventSourcing.Aggregates;
 using Newtonsoft.Json;
-using Sample.Infrastructure.EventSourcing.Aggregates;
 using Sample.UserManagement.Contract.Events;
 
 namespace Sample.UserManagement.Domain.Aggregates

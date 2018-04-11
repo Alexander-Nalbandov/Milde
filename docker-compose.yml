@@ -2,32 +2,27 @@ version: '3'
 
 services:
   rabbit:
-    #container_name: sample-rabbit
     hostname: sample-rabbit
     image: rabbitmq:management
     ports:
       - "15672:15672"
       - "5672:5672"
   redis:
-    #container_name: sample-redis
     hostname: sample-redis
     image: redis
     ports:
       - "6379:6379"
   es:
-    #container_name: sample-es
     hostname: sample-es
     image: eventstore/eventstore
     ports:
       - "2113:2113"
       - "1113:1113"
   redis-ui:
-    #container_name: sample-redis-ui
     hostname: sample-redis-ui
     image: rediscommander/redis-commander:latest
     depends_on:
       - redis
-    #build: .
     restart: always
     environment:
     - REDIS_HOSTS=local:redis:6379

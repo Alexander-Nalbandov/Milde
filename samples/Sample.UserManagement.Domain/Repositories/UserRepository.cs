@@ -1,6 +1,6 @@
-﻿using Sample.Infrastructure.EventSourcing.Aggregates;
-using Sample.Infrastructure.EventSourcing.Cache;
-using Sample.Infrastructure.EventSourcing.Events;
+﻿using Milde.EventSourcing.Aggregates;
+using Milde.EventSourcing.Cache;
+using Milde.EventSourcing.Events;
 
 namespace Sample.UserManagement.Domain.Repositories
 {

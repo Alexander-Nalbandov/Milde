@@ -1,16 +1,14 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
-using Sample.Infrastructure.AggregateCache;
-using Sample.Infrastructure.EventSourcing.Hosting;
-using Sample.Infrastructure.EventStore;
-using Sample.Infrastructure.Hosting;
-using Sample.Infrastructure.Hosting.Service;
-using Sample.Infrastructure.Remoting.Rabbit.Registration;
+using Milde.AggregateCache;
+using Milde.EventSourcing.Hosting;
+using Milde.EventStore;
+using Milde.Hosting.Service;
+using Milde.Remoting.Rabbit.Registration;
 using Sample.UserManagement.Contract;
 using Sample.UserManagement.Domain.Repositories;
 using Serilog;
 
-// ReSharper disable once CheckNamespace
 namespace Sample.UserManagement.Handlers
 {
     public partial class UserManagementService : IService, IUserManagementService
@@ -35,7 +33,7 @@ namespace Sample.UserManagement.Handlers
         {
             builder.WithEventSourcing(eventSourcingConfig =>
                    {
-                       eventSourcingConfig.WithComplexAggregateCache()
+                       AggregateCacheModule.WithComplexAggregateCache(eventSourcingConfig)
                                           .WithEventStoreAsES();
                    }, config)
                    .WithRabbitRemoting(configurator =>
