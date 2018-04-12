@@ -79,6 +79,13 @@ namespace Milde.Redis.AggregateCache
             return this._serializer.Deserialize<TAggregate>(value);
         }
 
+        public async Task<IList<TAggregate>> GetAggregates(Func<TAggregate, bool> predicate)
+        {
+            var key = this.GetKey();
+            var values = await this._redis.HashGetAllAsync(key);
+            return values.Select(v => this._serializer.Deserialize<TAggregate>(v.Value)).Where(predicate).ToList();
+        }
+
         public Task SaveAggregate(TAggregate aggregate)
         {
             return this.SaveAggregates(new[] {aggregate});

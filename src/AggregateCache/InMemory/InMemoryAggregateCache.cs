@@ -56,6 +56,11 @@ namespace Milde.AggregateCache.InMemory
             return Task.FromResult<TAggregate>(null);
         }
 
+        public async Task<IList<TAggregate>> GetAggregates(Func<TAggregate, bool> predicate)
+        {
+            return this._aggregates.Values.Where(predicate).ToList();
+        }
+
         public Task SaveAggregate(TAggregate aggregate)
         {
             return this.SaveAggregates(new[] {aggregate});

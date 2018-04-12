@@ -13,6 +13,7 @@ namespace Milde.EventSourcing.Cache
 
         Task<IList<TAggregate>> GetAllAggregates();
         Task<TAggregate> GetAggregate(Guid id);
+        Task<IList<TAggregate>> GetAggregates(Func<TAggregate, bool> predicate);
         Task SaveAggregate(TAggregate aggregate);
         Task SaveAggregates(IList<TAggregate> aggregates);
     }

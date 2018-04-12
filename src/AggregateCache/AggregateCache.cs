@@ -57,6 +57,11 @@ namespace Milde.AggregateCache
             return this._inMemoryCache.GetAggregate(id);
         }
 
+        public Task<IList<TAggregate>> GetAggregates(Func<TAggregate, bool> predicate)
+        {
+            return this._inMemoryCache.GetAggregates(predicate);
+        }
+
         public async Task SaveAggregate(TAggregate aggregate)
         {
             await this._redisCache.SaveAggregate(aggregate);
