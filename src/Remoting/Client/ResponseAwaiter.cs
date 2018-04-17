@@ -11,22 +11,22 @@ namespace Milde.Remoting.Client
 
         public ResponseAwaiter()
         {
-            CorrelationId = Guid.NewGuid().ToString();
-            _completionSource = new TaskCompletionSource<TResponse>();
+            this.CorrelationId = Guid.NewGuid().ToString();
+            this._completionSource = new TaskCompletionSource<TResponse>();
         }
 
         public string CorrelationId { get; }
 
-        public Task<TResponse> Result => _completionSource.Task;
+        public Task<TResponse> Result => this._completionSource.Task;
 
         public void SetResult(TResponse result)
         {
-            _completionSource.SetResult(result);
+            this._completionSource.SetResult(result);
         }
 
         public void SetException(Exception ex)
         {
-            _completionSource.SetException(ex);
+            this._completionSource.SetException(ex);
         }
     }
 }

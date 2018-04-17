@@ -14,12 +14,12 @@ namespace Milde.Remoting.Client
 
         private void SetExecutor(RemoteProcedureExecutor<TInterface> executor)
         {
-            _executor = executor;
+            this._executor = executor;
         }
 
         private void SetConverter(ResponseConverter converter)
         {
-            _converter = converter;
+            this._converter = converter;
         }
 
         internal static TInterface Create(RemoteProcedureExecutor<TInterface> executor, ResponseConverter converter)
@@ -33,17 +33,20 @@ namespace Milde.Remoting.Client
         protected override dynamic Invoke(MethodInfo method, object[] args)
         {
             if (!typeof(Task).IsAssignableFrom(method.ReturnType))
+            {
                 throw new InvalidOperationException("ServiceProxy supports only asynchronous methods.");
+            }
 
             if (!method.ReturnType.IsGenericType)
+            {
                 throw new InvalidOperationException("ServiceProxy doesn't support VOID methods.");
+            }
 
             var request = new RemoteRequest(method.Name, args.Select(JsonConvert.SerializeObject).ToArray());
             var routingKey = GetRoutingKey(method.Name);
-            var response = _executor.Execute(request, routingKey).Result;
+            var response = this._executor.Execute(request, routingKey).Result;
 
-            var convertedResponse =
-                _converter.Convert(response, method.ReturnType.GetGenericArguments().First());
+            var convertedResponse = this._converter.Convert(response, method.ReturnType.GetGenericArguments().First());
             return convertedResponse;
         }
 
