@@ -54,20 +54,32 @@ namespace Milde.EventSourcing.Aggregates
         public void ApplyEvent(IAggregateEvent @event)
         {
             if (this.Id != @event.AggregateId)
+            {
                 return;
+            }
+
+            if (this.Version + 1 != @event.Version)
+            {
+                throw new InvalidOperationException();
+            }
 
             this.Version = @event.Version;
-            this.ShardKey = @event.ShardKey;
+
+            if (@event.Version == 1)
+            {
+                this.ShardKey = @event.ShardKey;
+            }
+            else if (this.ShardKey != @event.ShardKey)
+            {
+                throw new InvalidOperationException();
+            }
+
             this.CallApply(@event);
 
             this._changes.Add(@event);
         }
 
-        protected void CallApply(IAggregateEvent @event)
-        {
-            ((dynamic) this).Apply((dynamic) @event);
-        }
-
+        protected abstract void CallApply(IAggregateEvent @event);
 
         private static int GenerateShardKey()
         {

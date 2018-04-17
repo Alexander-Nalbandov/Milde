@@ -42,7 +42,9 @@ namespace Milde.Remoting.Service
             }
             catch (TargetInvocationException e) when (e.InnerException is AggregateException)
             {
-                this.SendErrorResponse(((AggregateException)e.InnerException).InnerExceptions.First(), request.Headers);
+                var sourceException = ((AggregateException) e.InnerException).InnerExceptions.First();
+                _logger.Warning(sourceException, "{ServiceName}: Exception at {RequestName}", typeof(TImplementation).Name, request.MethodName);
+                this.SendErrorResponse(sourceException, request.Headers);
             }
             catch (Exception e)
             {
@@ -87,7 +89,7 @@ namespace Milde.Remoting.Service
             {
                 try
                 {
-                    //TODO: do more strict typing. Currently value 123 can be assigned 
+                    //TODO: do more strict typing. Currently value 123 can be assigned to bool
                     typedParameters[cnt] =
                         JsonConvert.DeserializeObject(args[cnt].ToString(), parameters[cnt].ParameterType);
                 }

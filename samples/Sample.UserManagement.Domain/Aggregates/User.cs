@@ -1,5 +1,6 @@
 ﻿using System;
 using Milde.EventSourcing.Aggregates;
+using Milde.EventSourcing.Events;
 using Newtonsoft.Json;
 using Sample.UserManagement.Contract.Events;
 
@@ -70,26 +71,31 @@ namespace Sample.UserManagement.Domain.Aggregates
         }
 
 
-        public void Apply(UserCreatedEvent @event)
+        private void Apply(UserCreatedEvent @event)
         {
             this.FirstName = @event.FirstName;
             this.LastName = @event.LastName;
             this.Age = @event.Age;
         }
 
-        public void Apply(UserFirstNameChanged @event)
+        private void Apply(UserFirstNameChanged @event)
         {
             this.FirstName = @event.FirstName;
         }
 
-        public void Apply(UserLastNameChanged @event)
+        private void Apply(UserLastNameChanged @event)
         {
             this.LastName = @event.LastName;
         }
 
-        public void Apply(UserAgeChanged @event)
+        private void Apply(UserAgeChanged @event)
         {
             this.Age = @event.Age;
+        }
+
+        protected override void CallApply(IAggregateEvent @event)
+        {
+            ((dynamic)this).Apply((dynamic)@event);
         }
     }
 }
